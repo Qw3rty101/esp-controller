@@ -5,11 +5,8 @@ import Landing from "./pages/Landing";
 import Reason from "./pages/Reason";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
-import { useMqtt } from "./hooks/UseMqtt";
 
 const App: React.FC = () => {
-   const { client } = useMqtt();
-   console.log(client)
    return (
       <Router>
          <Routes>

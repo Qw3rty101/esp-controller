@@ -20,7 +20,7 @@ export const useMqtt = () => {
          setStatus('Connected');
          console.log('Connected to MQTT Broker');
 
-         mqttClient.subscribe('topic/test', (err) => {
+         mqttClient.subscribe(["weather/rain", "weather/prediction"], (err) => {
             if (err) {
                console.error('Subscribe error:', err);
                setStatus('Error');

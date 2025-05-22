@@ -1,5 +1,5 @@
 // src/pages/Home.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../css/home.css";
@@ -49,8 +49,11 @@ import {
 } from "react-icons/wi";
 
 import "../css/home.css";
+import { useMqtt } from "../hooks/UseMqtt";
+import { responseDataSensor } from "../types";
 
 const Home: React.FC = () => {
+   const [data, setData] = useState<responseDataSensor>();
    useEffect(() => {
       document.body.classList.add("home-page");
       return () => {
@@ -63,6 +66,16 @@ const Home: React.FC = () => {
    const goToSettings = () => {
       navigate("/settings");
    };
+
+   const { messages } = useMqtt();
+
+   useEffect(() => {
+      if (messages.length > 0) {
+         setData(JSON.parse(messages[0]));
+      }
+   }, [messages, data, setData]);
+
+
 
    return (
       <>
@@ -111,32 +124,34 @@ const Home: React.FC = () => {
             Esp Weather Controller
          </div>
 
-         <div className="stat-esp">
-            <div className="stat-column">
-               <div className="stat-item">
-                  <WiHumidity className="icon" />
-                  <div className="value">38.4</div>
-                  <b className="label">Humidity</b>
-               </div>
-               <div className="stat-item">
+         {data && (
+            <div className="stat-esp">
+               <div className="stat-column">
+                  <div className="stat-item">
+                     <WiHumidity className="icon" />
+                     <div className="value">{data?.humidity ?? '-'}</div>
+                     <b className="label">Humidity</b>
+                  </div>
+                  <div className="stat-item">
                   <FaTemperatureHigh className="icon" />
-                  <div className="value">31.8</div>
+                  <div className="value">{data.temperature ?? '-'}</div>
                   <b className="label">Temperature</b>
                </div>
-            </div>
-            <div className="stat-column">
-               <div className="stat-item">
-                  <FaWind className="icon" />
-                  <div className="value">100.87</div>
-                  <b className="label">Pressure</b>
                </div>
-               <div className="stat-item">
-                  <FaArrowsAltV className="icon" />
-                  <div className="value">47.69</div>
-                  <b className="label">Altitude</b>
+               <div className="stat-column">
+                  <div className="stat-item">
+                     <FaWind className="icon" />
+                     <div className="value">{data.pressure ?? '-'}</div>
+                     <b className="label">Pressure</b>
+                  </div>
+                  <div className="stat-item">
+                     <FaArrowsAltV className="icon" />
+                     <div className="value">{data.altitude?.toFixed(2) ?? '-'} m</div>
+                     <b className="label">Altitude</b>
+                  </div>
                </div>
             </div>
-         </div>
+         )}
 
          <div className="weather-ai">
             <span className="ai-icon">
