@@ -139,7 +139,9 @@ const Home: React.FC = () => {
          </div>
 
          <div className="weather-ai">
-            <RiGeminiLine className="ai-icon" />
+            <span className="ai-icon">
+               <RiGeminiLine />
+            </span>
             <p>
                Lorem ipsum dolor sit amet consectetur adipisicing elit.
                Voluptatum, illum?
