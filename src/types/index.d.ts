@@ -1,11 +1,11 @@
 export interface responseDataSensor {
 	altitude: float;
 	humidity: float;
-	local_conditions: localConditions;
 	pressure: float;
 	rain_detected: boolean;
 	rain_level: number;
 	temperature: float;
+	local_conditions: localConditions;
 }
 
 export interface localConditions {

@@ -9,6 +9,32 @@ body.home-page {
          rgba(202, 225, 243, 1) 100%);
 }
 
+
+/* 🌅 Morning */
+body.theme-morning.home-page {
+   background: linear-gradient(179deg, #87cefa 60%, #c4c0b1 100%);
+}
+
+/* ☀️ Day */
+body.theme-day.home-page {
+   background: linear-gradient(179deg, #4a90e2 60%, #ffffff 100%);
+}
+
+/* 🌤️ Afternoon */
+body.theme-afternoon.home-page {
+   background: linear-gradient(179deg, #3b6ebf 60%, #fff1d6 100%);
+}
+
+/* 🌇 Evening */
+body.theme-evening.home-page {
+   background: linear-gradient(179deg, #2c4a77 60%, #ffe4b5 100%);
+}
+
+/* 🌃 Night */
+body.theme-night.home-page {
+   background: linear-gradient(179deg, #1c2f4e 60%, #1a1a1a 100%);
+}
+
 .nav {
    color: #d6e6f2;
    position: absolute;
@@ -253,6 +279,81 @@ body.home-page {
    opacity: 0.6;
 }
 
+/* Skeleton dasar */
+.skeleton {
+   pointer-events: none;
+   user-select: none;
+   background: rgba(255, 255, 255, 0.15);
+   /* Lebih transparan */
+   backdrop-filter: blur(12px);
+   /* Blur lebih kuat */
+   border-radius: 16px;
+   /* Lebih rounded */
+   border: 1px solid rgba(255, 255, 255, 0.18);
+   /* Border halus */
+   box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+   /* Shadow multidimensi */
+   position: relative;
+   overflow: hidden;
+   color: transparent !important;
+}
+
+/* Placeholder kotak untuk icon, value, label */
+.skeleton .icon-placeholder {
+   width: 32px;
+   height: 32px;
+   margin-bottom: 8px;
+   border-radius: 6px;
+   background: #ffffff;
+   margin: 0 auto 10px;
+}
+
+.skeleton .value-placeholder {
+   width: 60%;
+   height: 22px;
+   border-radius: 6px;
+   background: #ffffff;
+   margin: 0 auto 6px;
+}
+
+.skeleton .label-placeholder {
+   width: 40%;
+   height: 14px;
+   border-radius: 6px;
+   background: #ffffff;
+   margin: 0 auto;
+}
+
+/* Animasi shimmer gebrai */
+.skeleton::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: -150%;
+   width: 150%;
+   height: 100%;
+   background: linear-gradient(90deg,
+         rgba(255, 255, 255, 0) 0%,
+         rgba(255, 255, 255, 0.15) 50%,
+         rgba(255, 255, 255, 0) 100%);
+   animation: shimmer 1.5s infinite;
+   z-index: 1;
+}
+
+@keyframes shimmer {
+   0% {
+      left: -150%;
+   }
+
+   100% {
+      left: 150%;
+   }
+}
+
+
+
 .weather-ai {
    margin: 40px 20px;
    padding: 20px;
@@ -349,5 +450,57 @@ body.home-page {
    background-color: rgba(255, 255, 255, 0.8);
    border: 1px solid #a0c4ff;
 }
+
+.mqtt-status-bar {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   padding: 10px;
+   color: white;
+   text-align: center;
+   font-weight: bold;
+   z-index: 999;
+   animation: fadeInUp 0.3s ease-in-out;
+}
+
+.mqtt-status-bar.connecting {
+   background-color: #facc15;
+   /* kuning */
+}
+
+.mqtt-status-bar.connected {
+   background-color: #22c55e;
+   /* hijau */
+}
+
+.mqtt-status-bar.online {
+   background-color: #16a34a;
+   /* hijau lebih gelap */
+}
+
+.mqtt-status-bar.offline {
+   background-color: #6b7280;
+   /* abu/grey */
+}
+
+.mqtt-status-bar.error,
+.mqtt-status-bar.closed {
+   background-color: #ef4444;
+   /* merah */
+}
+
+@keyframes fadeInUp {
+   from {
+      transform: translateY(100%);
+      opacity: 0;
+   }
+
+   to {
+      transform: translateY(0%);
+      opacity: 1;
+   }
+}
+
 
 /* End Home Page */

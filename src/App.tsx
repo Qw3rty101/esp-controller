@@ -1,12 +1,10 @@
-// src/App.tsx
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Landing from "./pages/Landing";
-import Reason from "./pages/Reason";
-import Home from "./pages/Home";
-import Settings from "./pages/Settings";
+import Landing from "@/pages/Landing";
+import Reason from "@/pages/Reason";
+import Home from "@/pages/Home";
+import Settings from "@/pages/Settings";
 
-const App: React.FC = () => {
+const App = () => {
    return (
       <Router>
          <Routes>

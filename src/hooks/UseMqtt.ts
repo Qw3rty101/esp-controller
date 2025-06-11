@@ -1,55 +1,106 @@
-// src/hooks/useMqtt.ts
-import { useEffect, useState } from 'react';
-import mqtt, { MqttClient } from 'mqtt';
+import mqtt, { MqttClient } from "mqtt";
+import { useEspStore } from "@/store/useEspStore";
+import { responseDataSensor } from "@/types";
+import { useEffect, useState, useRef } from "react";
+type MqttStatus = "Connecting" | "Connected" | "Online" | "Offline" | "Error" | "Closed";
 
 export const useMqtt = () => {
-   const [client, setClient] = useState<MqttClient | null>(null);
-   const [messages, setMessages] = useState<string[]>([]);
-   const [status, setStatus] = useState<'Connecting' | 'Connected' | 'Error' | 'Closed'>('Connecting');
+	const [client, setClient] = useState<MqttClient | null>(null);
+	const [status, _setStatus] = useState<MqttStatus>("Connecting");
+	const statusRef = useRef<MqttStatus>("Connecting");
 
-   useEffect(() => {
-      const mqttClient = mqtt.connect('wss://d7f289168ee84fcf87faf37507bdc8c4.s1.eu.hivemq.cloud:8884/mqtt', {
-         username: 'project-web-mqtt',
-         password: 'Angeom_313212',
-         clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
-      });
+	const setStatus = (newStatus: MqttStatus) => {
+		statusRef.current = newStatus;
+		_setStatus(newStatus);
+	};
 
-      setClient(mqttClient);
+	// store hooks
+	const setLoadingEsp = useEspStore((s) => s.setLoadingEsp);
+	const setRainData = useEspStore((s) => s.setRainData);
+	const setPredictionData = useEspStore((s) => s.setPredictionData);
 
-      mqttClient.on('connect', () => {
-         setStatus('Connected');
-         console.log('Connected to MQTT Broker');
+	useEffect(() => {
+		let isMounted = true;
+		let offlineCheckTimer: ReturnType<typeof setInterval>;
+		let lastMessageTime = Date.now();
 
-         mqttClient.subscribe(["weather/rain", "weather/prediction"], (err) => {
-            if (err) {
-               console.error('Subscribe error:', err);
-               setStatus('Error');
-            } else {
-               console.log('Subscribed to topic/test');
-            }
-         });
-      });
+		const mqttClient = mqtt.connect(import.meta.env.VITE_MQTT_URL, {
+			username: import.meta.env.VITE_MQTT_USER,
+			password: import.meta.env.VITE_MQTT_PASS,
+			clientId: "mqttjs_" + Math.random().toString(16).slice(2, 8),
+		});
 
-      mqttClient.on('message', (topic, message) => {
-         const msg = message.toString();
-         console.log(`Message on ${topic}: ${msg}`);
-         setMessages((prev) => [...prev, msg]);
-      });
+		setClient(mqttClient);
+		setLoadingEsp(true);
 
-      mqttClient.on('error', (err) => {
-         console.error('MQTT Error:', err);
-         setStatus('Error');
-      });
+		mqttClient.on("connect", () => {
+			if (!isMounted) return;
 
-      mqttClient.on('close', () => {
-         console.log('MQTT Connection closed');
-         setStatus('Closed');
-      });
+			console.log("✅ Connected to MQTT Broker");
+			setStatus("Connected");
+			setLoadingEsp(false);
 
-      return () => {
-         mqttClient.end();
-      };
-   }, []);
+			if (mqttClient.connected) {
+				mqttClient.subscribe(["weather/rain", "weather/prediction"], (err) => {
+					if (err) {
+						console.error("❌ Subscribe error:", err);
+						setStatus("Error");
+					} else {
+						console.log("📡 Subscribed to topics");
+					}
+				});
+			}
 
-   return { client, messages, status };
+			offlineCheckTimer = setInterval(() => {
+				if (mqttClient.connected && (statusRef.current === "Connected" || statusRef.current === "Online")) {
+					if (Date.now() - lastMessageTime > 7000) {
+						setStatus("Offline");
+					}
+				}
+			}, 3000);
+		});
+
+		mqttClient.on("message", (topic, message) => {
+			if (!isMounted) return;
+			lastMessageTime = Date.now();
+
+			if (statusRef.current !== "Online") setStatus("Online");
+
+			const msgString = message.toString();
+
+			if (topic === "weather/rain") {
+				try {
+					const parsed: responseDataSensor = JSON.parse(msgString);
+					setRainData(parsed);
+					console.log("🌧️ Rain data updated", parsed);
+				} catch (e) {
+					console.error("💥 Failed to parse rain data:", e);
+				}
+			} else if (topic === "weather/prediction") {
+				setPredictionData(msgString);
+				console.log("🔮 Prediction data updated", msgString);
+			}
+		});
+
+		mqttClient.on("error", (err) => {
+			console.error("💣 MQTT Error:", err);
+			setStatus("Error");
+			setLoadingEsp(false);
+		});
+
+		mqttClient.on("close", () => {
+			console.log("🔌 MQTT Connection closed");
+			setStatus("Closed");
+			setLoadingEsp(false);
+			clearInterval(offlineCheckTimer);
+		});
+
+		return () => {
+			isMounted = false;
+			mqttClient.end(true);
+			clearInterval(offlineCheckTimer);
+		};
+	}, [setLoadingEsp, setRainData, setPredictionData]);
+
+	return { client, status };
 };

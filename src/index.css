@@ -13,4 +13,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+--color-primary: #75aaff; /* default */
+--color-primary-morning: #87cefa;   /* Langit pagi, biru terang soft */
+--color-primary-day: #4a90e2;       /* Langit siang, biru cerah jelas */
+--color-primary-afternoon: #3b6ebf; /* Langit mulai menggelap */
+--color-primary-evening: #2c4a77;   /* Senja, biru keunguan gelap */
+--color-primary-night: #1c2f4e;     /* Malam, biru tua gelap banget */
+
+--color-secondary: #f9f9f9; /* default */
+--color-secondary-morning: #fffbeb;   /* Kuning hangat lembut (matahari terbit) */
+--color-secondary-day: #ffffff;       /* Putih terang (siang full cahaya) */
+--color-secondary-afternoon: #fff1d6; /* Kuning pastel (matahari mulai turun) */
+--color-secondary-evening: #ffe4b5;   /* Oranye soft (golden hour) */
+--color-secondary-night: #1a1a1a;     /* Gelap, hampir hitam (malam total) */
+
 }

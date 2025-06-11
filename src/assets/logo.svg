@@ -1,0 +1,45 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Verdana, sans-serif">
+  <defs>
+    <linearGradient id="metallicChipGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E5E5E5" />    <stop offset="15%" stop-color="#DCDCDC" />   <stop offset="50%" stop-color="#B8B8B8" />   <stop offset="85%" stop-color="#DCDCDC" />   <stop offset="100%" stop-color="#C8C8C8" />  </linearGradient>
+
+    <linearGradient id="aiTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8A2BE2" />   <stop offset="50%" stop-color="#007AFF" />   <stop offset="100%" stop-color="#FFA500" /> </linearGradient>
+
+    <filter id="cloudGlowEffect" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3.5" result="blurPart" />
+      <feComponentTransfer in="blurPart" result="strongerBlur">
+          <feFuncA type="linear" slope="1.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="strongerBlur" /> <feMergeNode in="SourceGraphic" /> </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#000000" />
+
+  <path d="M 45 125 Q 30 110, 50 90 Q 55 70, 80 75 Q 90 60, 100 68 Q 110 60, 120 75 Q 145 70, 150 90 Q 170 110, 155 125 Q 100 148, 45 125 Z"
+        fill="#FFFFFF" filter="url(#cloudGlowEffect)" />
+
+  <g stroke="#B0B0B0" stroke-width="1.2" stroke-linecap="round">
+    <line x1="75" y1="92.5" x2="50" y2="92.5"/>
+    <line x1="75" y1="100"  x2="50" y2="100"/>
+    <line x1="75" y1="107.5" x2="50" y2="107.5"/>
+    <line x1="125" y1="92.5" x2="150" y2="92.5"/>
+    <line x1="125" y1="100"  x2="150" y2="100"/>
+    <line x1="125" y1="107.5" x2="150" y2="107.5"/>
+    
+    <line x1="87.5" y1="85" x2="87.5" y2="65"/>
+    <line x1="112.5" y1="85" x2="112.5" y2="65"/>
+    <line x1="87.5" y1="115" x2="87.5" y2="135"/>
+    <line x1="112.5" y1="115" x2="112.5" y2="135"/>
+  </g>
+
+  <rect x="75" y="85" width="50" height="30" rx="4" ry="4"
+        fill="url(#metallicChipGradient)" stroke="#686868" stroke-width="0.75" />
+
+  <text x="100" y="100.5"
+        font-size="15.5" font-weight="bold"
+        text-anchor="middle" dominant-baseline="middle"
+        fill="url(#aiTextGradient)">AI</text>
+</svg>
