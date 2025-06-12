@@ -43,7 +43,7 @@ export const useOnboardingStore = create<OnboardingStore>((set, get) => ({
     const data = get().stepData;
     try {
       // Setelah submit ke backend, bisa simpan ke localStorage juga kalau mau
-      useDataStore.getState().setDataUser({
+      useDataStore.getState().setUserData({
         lat: data.lat!,
         lon: data.lon!,
         name: data.name!,
