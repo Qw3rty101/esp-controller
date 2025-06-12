@@ -1,4 +1,4 @@
-import { responseDataSensor } from '@/types';
+import { ReposnseDataPrediction, responseDataSensor } from '@/types';
 import { create } from 'zustand';
 
 type EspState = {
@@ -6,9 +6,9 @@ type EspState = {
   setLoadingEsp: (value: boolean) => void;
 
   rainData: responseDataSensor | null;
-  predictionData: string;
+  predictionData: ReposnseDataPrediction | null;
   setRainData: (val: responseDataSensor) => void;
-  setPredictionData: (val: string) => void;
+  setPredictionData: (val: ReposnseDataPrediction) => void;
 };
 
 export const useEspStore = create<EspState>((set) => ({
@@ -16,7 +16,7 @@ export const useEspStore = create<EspState>((set) => ({
   setLoadingEsp: (value) => set({ isLoadingEsp: value }),
 
   rainData: null,
-  predictionData: '',
+  predictionData: null,
   setRainData: (val) => set({ rainData: val }),
   setPredictionData: (val) => set({ predictionData: val }),
 }));

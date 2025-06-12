@@ -1,3 +1,9 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
 /* Home Page */
 body.home-page {
    padding: 1px;
@@ -8,7 +14,6 @@ body.home-page {
          rgba(117, 170, 255, 1) 61%,
          rgba(202, 225, 243, 1) 100%);
 }
-
 
 /* 🌅 Morning */
 body.theme-morning.home-page {
@@ -54,12 +59,15 @@ body.theme-night.home-page {
    color: #f7fbfc;
    padding: 20px;
    border-radius: 20px;
+   margin-bottom: 10px;
 }
 
 .inform-title {
    margin-top: 8px;
    font-size: 28px;
    font-weight: 700;
+   color: #f7fbfc;
+   text-align: left;
 }
 
 .predict {
@@ -72,6 +80,17 @@ body.theme-night.home-page {
    padding: 0 10px;
 }
 
+
+.header .location {
+   font-size: 12px;
+   font-weight: 600;
+   margin: 0;
+   color: #f7fbfc;
+   display: flex;
+   align-items: center;
+   gap: 3px;
+}
+
 .weather {
    -webkit-backdrop-filter: blur(10px);
    flex: 0 0 calc(15% - 12px);
@@ -80,7 +99,8 @@ body.theme-night.home-page {
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   padding: 16px;
+   padding: 10px;
+   color: white;
    /* Sedikit lebih besar */
    background: rgba(255, 255, 255, 0.15);
    /* Lebih transparan */
@@ -99,8 +119,6 @@ body.theme-night.home-page {
       background 0.3s ease,
       box-shadow 0.3s ease;
    cursor: default;
-   overflow: hidden;
-   position: relative;
 }
 
 .weather:hover {
@@ -119,7 +137,7 @@ body.theme-night.home-page {
 
 .weather-text p {
    margin: 0;
-   font-size: 28px;
+   font-size: 24px;
    font-weight: 600;
    color: #f7fbfc;
 }
@@ -147,10 +165,12 @@ body.theme-night.home-page {
    font-size: 22px;
    font-weight: 600;
    margin-bottom: 8px;
+   color: #f7fbfc;
 }
 
 .data-info {
    font-size: 48px;
+   color: #f7fbfc;
    font-weight: 300;
    margin: 0;
 }
@@ -340,6 +360,130 @@ body.theme-night.home-page {
          rgba(255, 255, 255, 0) 100%);
    animation: shimmer 1.5s infinite;
    z-index: 1;
+}
+
+
+/* Skeleton prediksi */
+.skeleton-predict {
+   pointer-events: none;
+   user-select: none;
+   background: rgba(255, 255, 255, 0.15);
+   /* Lebih transparan */
+   backdrop-filter: blur(12px);
+   /* Blur lebih kuat */
+   border-radius: 16px;
+   /* Lebih rounded */
+   border: 1px solid rgba(255, 255, 255, 0.18);
+   /* Border halus */
+   box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+   /* Shadow multidimensi */
+   position: relative;
+   overflow: hidden;
+   color: transparent !important;
+}
+
+/* Skeleton Loading Styles */
+.predict-skeleton {
+   width: 100%;
+}
+
+.header-skeleton {
+   margin-bottom: 1.5rem;
+}
+
+.location-skeleton {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   margin-bottom: 0.5rem;
+}
+
+.pin-icon-skeleton {
+   width: 14px;
+   height: 14px;
+   background-color: #e0e0e0;
+   border-radius: 2px;
+}
+
+.title-skeleton {
+   margin: 0.5rem 0;
+}
+
+.subtitle-skeleton {
+   margin-bottom: 1rem;
+}
+
+.weather-list-skeleton {
+   display: flex;
+   gap: 1rem;
+   overflow-x: auto;
+   padding-bottom: 0.5rem;
+}
+
+.weather-item-skeleton {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   min-width: 60px;
+}
+
+.weather-icon-skeleton {
+   width: 32px;
+   height: 32px;
+   background-color: #e0e0e0;
+   border-radius: 50%;
+   margin-bottom: 0.5rem;
+}
+
+.weather-text-skeleton {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.25rem;
+}
+
+.text-skeleton {
+   background-color: #e0e0e0;
+   border-radius: 4px;
+   height: 1em;
+}
+
+.text-skeleton.short {
+   width: 60px;
+}
+
+.text-skeleton.medium {
+   width: 120px;
+}
+
+.text-skeleton.long {
+   width: 180px;
+}
+
+.text-skeleton.very-short {
+   width: 30px;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer-animation {
+   0% {
+      background-position: -468px 0;
+   }
+
+   100% {
+      background-position: 468px 0;
+   }
+}
+
+.predict-skeleton .text-skeleton,
+.predict-skeleton .pin-icon-skeleton,
+.predict-skeleton .weather-icon-skeleton {
+   animation: shimmer-animation 1.5s infinite;
+   background: linear-gradient(to right, #e0e0e0 8%, #f0f0f0 18%, #e0e0e0 33%);
+   background-size: 800px 104px;
+   position: relative;
 }
 
 @keyframes shimmer {

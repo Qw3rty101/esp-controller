@@ -12,22 +12,22 @@ const BarStatusFoot = () => {
 		let text = "";
 		switch (status) {
 			case "Connecting":
-				text = "🔌 Connecting to Server...";
+				text = "Connecting to Server...";
 				break;
 			case "Connected":
-				text = "📡 Connected to Server";
+				text = "Connected to Server";
 				break;
 			case "Online":
-				text = "✅ Device Online";
+				text = "Device Online";
 				break;
 			case "Offline":
-				text = "📴 Device Not Responding";
+				text = "Device Not Responding";
 				break;
 			case "Error":
-				text = "❌ Connection Error";
+				text = "Connection Error";
 				break;
 			case "Closed":
-				text = "🔕 Connection Closed";
+				text = "Connection Closed";
 				break;
 			default:
 				text = "Unknown Status";
@@ -38,13 +38,13 @@ const BarStatusFoot = () => {
 
 		// Handle khusus Offline
 		if (status === "Offline") {
-			return; // Jangan hide otomatis
+			return;
 		}
 
-		// Kalau status Online setelah Offline, kasih delay sebelum hide
 		const timer = setTimeout(() => {
 			setShowStatusBar(false);
-		}, status === "Online" ? 3000 : 2000); // Online: 3s, others: 2s
+			 // Online: 3s, others: 2s
+		}, status === "Online" ? 3000 : 2000);
 
 		return () => clearTimeout(timer);
 	}, [status]);

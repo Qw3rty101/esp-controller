@@ -1,29 +1,30 @@
 /* Landing Page */
 .divcenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.column {
+  flex-direction: column;
+}
+
+/* Animasi muncul dari bawah */
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
   }
-  
-  .column {
-    flex-direction: column;
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  /* Animasi muncul dari bawah */
-  @keyframes slideUp {
-    0% {
-      transform: translateY(50px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .slide-up {
-    animation: slideUp 1s ease-out forwards;
-  }
-  
-  /* End Landing Page */
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+/* End Landing Page */

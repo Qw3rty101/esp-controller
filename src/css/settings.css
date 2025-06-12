@@ -20,6 +20,7 @@
     color: #666;
     font-size: 14px;
     cursor: pointer;
+    padding: 2rem;
   }
   
   .settings-button {
@@ -28,6 +29,7 @@
     color: #ccc;
     font-size: 14px;
     cursor: pointer;
+    padding: 2rem;
   }
   
   

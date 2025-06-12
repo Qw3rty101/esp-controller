@@ -1,6 +1,6 @@
 import mqtt, { MqttClient } from "mqtt";
 import { useEspStore } from "@/store/useEspStore";
-import { responseDataSensor } from "@/types";
+import { DataItemForeCast, ReposnseDataPrediction, responseDataSensor } from "@/types";
 import { useEffect, useState, useRef } from "react";
 type MqttStatus = "Connecting" | "Connected" | "Online" | "Offline" | "Error" | "Closed";
 
@@ -72,13 +72,14 @@ export const useMqtt = () => {
 				try {
 					const parsed: responseDataSensor = JSON.parse(msgString);
 					setRainData(parsed);
-					console.log("🌧️ Rain data updated", parsed);
+					// console.log("🌧️ Rain data updated", parsed);
 				} catch (e) {
 					console.error("💥 Failed to parse rain data:", e);
 				}
 			} else if (topic === "weather/prediction") {
-				setPredictionData(msgString);
-				console.log("🔮 Prediction data updated", msgString);
+				const parsedPrediction: ReposnseDataPrediction = JSON.parse(msgString);
+				const parsedForecast: DataItemForeCast[] = parsedPrediction ? parsedPrediction.forecast : [];
+				setPredictionData({ ...parsedPrediction, forecast: parsedForecast });
 			}
 		});
 

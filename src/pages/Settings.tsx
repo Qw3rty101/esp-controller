@@ -1,7 +1,7 @@
 import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../css/settings.css";
+import "@/css/settings.css";
 
 const Settings: React.FC = () => {
    const navigate = useNavigate();

@@ -1,7 +1,7 @@
 // src/pages/Landing.tsx
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/landing.css'
+import '@/css/landing.css'
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
