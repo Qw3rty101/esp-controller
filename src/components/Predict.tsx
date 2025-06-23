@@ -62,7 +62,7 @@ const SkeletonPredict = () => (
 			<div className="header-skeleton">
 				<div className="location-skeleton">
 					<div className="pin-icon-skeleton" />
-					<div className="text-skeleton short" />
+					<div className="text-skeleton long" />
 				</div>
 				<div className="title-skeleton">
 					<div className="text-skeleton long" />
@@ -78,7 +78,7 @@ const SkeletonPredict = () => (
 						<div className="weather-icon-skeleton" />
 						<div className="weather-text-skeleton">
 							<div className="text-skeleton short" />
-							<div className="text-skeleton very-short" />
+							<div className="text-skeleton very-min-short" />
 						</div>
 					</div>
 				))}
@@ -109,12 +109,13 @@ const Predict = () => {
 		return <SkeletonPredict />;
 	}
 
+
 	return (
 		<div>
 			<div className="header">
 				<small className="location">
 					<FiMapPin size={14} />
-					{dataUser?.data.location_name}
+					{dataUser?.location_name}
 				</small>
 				<h1 className="inform-title">
 					{predictionData && predictionData.prediksi.prediksi}
@@ -126,7 +127,7 @@ const Predict = () => {
 
 			<div className="predict">
 				{predictionData &&
-					forecast.map((item, index) => {
+					forecast.slice(0, 4).map((item, index) => {
 						const Icon = getWeatherIcon(item.weather_text);
 						return (
 							<div className="weather" key={index}>

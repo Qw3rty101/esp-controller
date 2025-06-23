@@ -67,12 +67,11 @@ export const useMqtt = () => {
 			if (statusRef.current !== "Online") setStatus("Online");
 
 			const msgString = message.toString();
-
+			
 			if (topic === "weather/rain") {
 				try {
 					const parsed: responseDataSensor = JSON.parse(msgString);
 					setRainData(parsed);
-					// console.log("🌧️ Rain data updated", parsed);
 				} catch (e) {
 					console.error("💥 Failed to parse rain data:", e);
 				}

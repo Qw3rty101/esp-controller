@@ -1,17 +1,17 @@
-// src/pages/Home.tsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { RiGeminiLine } from "react-icons/ri";
-import { FiSettings } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 
 import "@/css/home.css";
 import { applyTimeTheme } from "@/utils/themeUtils";
 import EspController from "@/components/EspController";
 import Predict from "@/components/Predict";
 import BarStatusFoot from "@/components/BarStatusFoot";
+import { useDataStore } from "@/store/useDataStore";
+import WeatherAi from "@/components/WeatherAi";
 
 const Home = () => {
-
+   const { resetUserData, dataUser } = useDataStore();
    const navigate = useNavigate();
 
    // Set theme
@@ -30,32 +30,33 @@ const Home = () => {
       };
    }, []);
 
-   const goToSettings = () => {
+   const goToReset = () => {
       navigate("/settings");
+      resetUserData();
    };
 
    return (
       <div>
          <div className="home-page">
-            <div className="nav" onClick={goToSettings}>
-               <FiSettings className="settings" />
+            <div className="nav" onClick={goToReset}>
+               <div className="nav-logo">
+                  <img src="/icon.png" width={50} alt="logo" draggable={false} />
+               </div>
+               <div className="nav-item">
+                  <h1>{dataUser?.name}</h1>
+                  <FiLogOut className="reset" />
+               </div>
             </div>
 
             <Predict />
 
             <EspController />
 
-            <div className="weather-ai">
-               <span className="ai-icon">
-                  <RiGeminiLine />
-               </span>
-               <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Voluptatum, illum?
-               </p>
-               <input type="text" placeholder="Ask anything" />
-            </div>
+            <WeatherAi />
          </div>
+         <footer>
+            <p>&copy; 2023 Weather Prediction. All rights reserved.</p>
+         </footer>
          <BarStatusFoot />
       </div>
    );

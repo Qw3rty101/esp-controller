@@ -42,23 +42,45 @@ body.theme-night.home-page {
 
 .nav {
    color: #d6e6f2;
-   position: absolute;
-   top: 20px;
-   right: 20px;
-   z-index: 100;
-   cursor: pointer;
+   display: flex;
+   justify-content: space-between;
+   padding: 10px 20px;
+   border-bottom: 0.20px solid #d6e6f2;
 }
 
-.settings {
-   font-size: 32px;
+.nav .nav-logo {
+   width: 50px;
+   height: 50px;
+   border-radius: 80px;
+}
+
+.nav .nav-logo img{
+   width: 50px;
+   height: 50px;
+   border-radius: 10px;
+}
+
+.nav .nav-item {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   color: #f7fbfc;
+   font-weight: 600;
+   font-size: 16px;
+}
+
+.nav .nav-item h1, .reset{
+   font-size: 24px;
+   margin: 0;
+   color: #f7fbfc;
+   font-weight: 600;
+   text-transform: capitalize;
 }
 
 .header {
-   margin-top: 40px;
    text-align: left;
    color: #f7fbfc;
    padding: 20px;
-   border-radius: 20px;
    margin-bottom: 10px;
 }
 
@@ -417,16 +439,40 @@ body.theme-night.home-page {
 
 .weather-list-skeleton {
    display: flex;
-   gap: 1rem;
+   gap: 10px;
    overflow-x: auto;
    padding-bottom: 0.5rem;
+   justify-content: center;
 }
 
 .weather-item-skeleton {
+   -webkit-backdrop-filter: blur(10px);
+   flex: 0 0 calc(15% - 12px);
+   height: 140px;
    display: flex;
    flex-direction: column;
+   justify-content: space-between;
    align-items: center;
-   min-width: 60px;
+   padding: 10px 5px;
+   color: white;
+   /* Sedikit lebih besar */
+   background: rgba(255, 255, 255, 0.15);
+   /* Lebih transparan */
+   backdrop-filter: blur(12px);
+   /* Blur lebih kuat */
+   border-radius: 16px;
+   /* Lebih rounded */
+   border: 1px solid rgba(255, 255, 255, 0.18);
+   /* Border halus */
+   box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+   /* Shadow multidimensi */
+   transition:
+      transform 0.3s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+   cursor: default;
 }
 
 .weather-icon-skeleton {
@@ -451,7 +497,7 @@ body.theme-night.home-page {
 }
 
 .text-skeleton.short {
-   width: 60px;
+   width: 50px;
 }
 
 .text-skeleton.medium {
@@ -464,6 +510,10 @@ body.theme-night.home-page {
 
 .text-skeleton.very-short {
    width: 30px;
+}
+
+.text-skeleton.very-min-short {
+   width: 20px;
 }
 
 /* Shimmer Animation */
@@ -494,105 +544,6 @@ body.theme-night.home-page {
    100% {
       left: 150%;
    }
-}
-
-
-
-.weather-ai {
-   margin: 40px 20px;
-   padding: 20px;
-   border-radius: 20px;
-   background: rgba(255, 255, 255, 0.2);
-   backdrop-filter: blur(10px);
-   -webkit-backdrop-filter: blur(10px);
-   border: 1px solid rgba(255, 255, 255, 0.18);
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   text-align: center;
-}
-
-.ai-icon {
-   position: relative;
-   font-size: 48px;
-   margin-bottom: 12px;
-   color: #f7fbfc;
-   padding: 10px;
-   width: 40px;
-   height: 40px;
-   border-radius: 50%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-}
-
-.ai-icon::before {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   border-radius: 50%;
-   background: conic-gradient(#75aaff,
-         #3f83d0,
-         #452bab,
-         #7c2bab,
-         #75aaff);
-   z-index: -1;
-   animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-   from {
-      transform: rotate(0deg);
-   }
-
-   to {
-      transform: rotate(360deg);
-   }
-}
-
-@keyframes backgroundRadiant {
-   0% {
-      background-color: #75aaff;
-   }
-
-   50% {
-      background-color: #3f83d0;
-   }
-
-   75% {
-      background-color: #452bab;
-   }
-
-   100% {
-      background-color: #7c2bab;
-   }
-}
-
-.weather-ai p {
-   color: #f7fbfc;
-   font-size: 16px;
-}
-
-.weather-ai input {
-   margin-top: 16px;
-   border-radius: 20px;
-   height: 50px;
-   width: 100%;
-   padding: 0 20px;
-   border: 1px solid #f7fbfc;
-   background-color: rgba(255, 255, 255, 0.6);
-   font-size: 16px;
-   outline: none;
-   box-sizing: border-box;
-   transition: 0.3s;
-}
-
-.weather-ai input:focus {
-   background-color: rgba(255, 255, 255, 0.8);
-   border: 1px solid #a0c4ff;
 }
 
 .mqtt-status-bar {
