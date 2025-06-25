@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'Weather-app-predict',
   webDir: 'dist',
   // server: {
-  //   url: 'http://192.168.152.15:5173/',
+  //   url: 'http://192.168.100.140:5173/',
   //   cleartext: true
   // },
 };

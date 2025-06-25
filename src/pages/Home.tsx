@@ -9,9 +9,12 @@ import Predict from "@/components/Predict";
 import BarStatusFoot from "@/components/BarStatusFoot";
 import { useDataStore } from "@/store/useDataStore";
 import WeatherAi from "@/components/WeatherAi";
+import { useEspStore } from "@/store/useEspStore";
+import ShowNotification from "@/components/showNotification";
 
 const Home = () => {
    const { resetUserData, dataUser } = useDataStore();
+   const { predictionData, rainData } = useEspStore();
    const navigate = useNavigate();
 
    // Set theme
@@ -52,10 +55,18 @@ const Home = () => {
 
             <EspController />
 
+            {rainData?.local_conditions?.conditions && predictionData?.prediksi && (
+               <ShowNotification
+                  conditionNow={rainData?.local_conditions?.conditions}
+                  predictedText={predictionData?.prediksi?.prediksi}
+               />
+
+            )}
+
             <WeatherAi />
          </div>
          <footer>
-            <p>&copy; 2023 Weather Prediction. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Weather Prediction. All rights reserved.</p>
          </footer>
          <BarStatusFoot />
       </div>

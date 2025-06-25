@@ -9,6 +9,7 @@ import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { getTimePeriod } from "@/utils/themeUtils";
 import { okaidia } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useEspStore } from "@/store/useEspStore";
 
 
 
@@ -17,7 +18,28 @@ interface Message {
 	sender: "user" | "assistant";
 }
 
+const WeatherAiSkeleton = () => (
+    <div className="skeleton-weather-ai">
+      <div className="icon-placeholder">
+        <RiGeminiLine style={{ opacity: 0 }} />
+      </div>
+      <div className="text-content">
+        <div className="text-line first-line"></div>
+        <div className="text-line second-line">
+          <span className="location-part"></span>
+          <span className="location-part"></span>
+          <span className="location-part"></span>
+        </div>
+      </div>
+      <div className="button-placeholder">
+        <HiSparkles style={{ opacity: 0 }} />
+      </div>
+    </div>
+  );
+
 const WeatherAi = () => {
+	const { predictionData, isLoadingEsp } = useEspStore();
+
 	const { dataUser } = useDataStore();
 	const [isOpen, setIsOpen] = useState(false);
 	const [messages, setMessages] = useState<Message[]>([]);
@@ -71,6 +93,10 @@ const WeatherAi = () => {
 			setLoading(false);
 		}
 	};
+
+	if (isLoadingEsp || !predictionData) {
+		return <WeatherAiSkeleton />;
+	}
 
 	return (
 		<>

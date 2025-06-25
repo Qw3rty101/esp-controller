@@ -74,7 +74,6 @@ export const useDataStore = create<UserState>((set, get) => ({
 				name: dataUser.name
 			});
 
-			console.log(res.data);
 			return res.data;
 		} catch (err) {
 			console.error("❌ Gagal cek user data:", err);

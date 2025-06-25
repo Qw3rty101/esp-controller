@@ -265,3 +265,122 @@
 .ai-modal-body::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+
+/* Weather AI Skeleton - Updated to match image */
+.skeleton-weather-ai {
+  pointer-events: none;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: auto;
+  margin: 20px;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.skeleton-weather-ai .icon-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.skeleton-weather-ai .text-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.skeleton-weather-ai .text-line {
+  height: 14px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.skeleton-weather-ai .text-line.first-line {
+  margin-bottom: 2px;
+}
+
+.skeleton-weather-ai .text-line.second-line {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: transparent;
+  height: auto;
+}
+
+.skeleton-weather-ai .location-part {
+  height: 12px;
+  width: 100%;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.skeleton-weather-ai .location-part:nth-child(1) {
+  width: calc(100% - 100px);
+}
+
+.skeleton-weather-ai .location-part:nth-child(2) {
+  width: 140px;
+}
+
+.skeleton-weather-ai .location-part:nth-child(3) {
+  width: 100px;
+}
+
+.skeleton-weather-ai .button-placeholder {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* Animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-weather-ai::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.5s infinite;
+}

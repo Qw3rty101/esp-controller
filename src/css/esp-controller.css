@@ -1,0 +1,143 @@
+.esp {
+	display: flex;
+	justify-content: center;
+	/* agar konten berada di tengah horizontal */
+	align-items: center;
+	gap: 10px;
+	color: #f7fbfc;
+	font-size: 24px;
+	margin: 40px 20px 0 20px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.cpu-icon {
+	font-size: 32px;
+	margin-bottom: 0;
+}
+
+.esp-condition {
+	display: flex;
+	flex-direction: column;
+	margin: 20px;
+	color: #f7fbfc;
+	font-size: 18px;
+	text-transform: capitalize;
+	justify-content: center;
+	align-items: center;
+}
+
+.esp-condition .esp-condition-item{
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 18px;
+}
+
+.esp-condition-icon{
+	font-size: 30px;
+}
+
+
+.stat-esp {
+	margin: 20px;
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	color: #f7fbfc;
+	font-size: 18px;
+}
+
+.stat-column {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	flex: 1;
+}
+
+.stat-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 6px;
+	padding: 16px;
+	/* Sedikit lebih besar */
+	background: rgba(255, 255, 255, 0.15);
+	/* Lebih transparan */
+	backdrop-filter: blur(12px);
+	/* Blur lebih kuat */
+	border-radius: 16px;
+	/* Lebih rounded */
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	/* Border halus */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	/* Shadow multidimensi */
+	transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+	cursor: default;
+	overflow: hidden;
+	position: relative;
+}
+
+/* Efek hover yang elegan */
+.stat-item:hover {
+	transform: translateY(-4px);
+	background: rgba(255, 255, 255, 0.22);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Efek highlight saat hover */
+.stat-item:hover::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: linear-gradient(90deg, #75aaff, #f3f3f3);
+}
+
+/* Animasi subtle untuk icon */
+.stat-item .icon {
+	transition: transform 0.3s ease;
+}
+
+.stat-item:hover .icon {
+	transform: scale(1.1);
+}
+
+/* Style untuk value/label */
+.stat-item .value {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: white;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.stat-item .label {
+	font-size: 0.8rem;
+	opacity: 0.8;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-item:hover {
+	transform: translateY(-8px);
+}
+
+.stat-item .icon {
+	font-size: 32px;
+}
+
+.stat-item .value {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.stat-item .label {
+	font-size: 14px;
+	opacity: 0.6;
+}
+
+

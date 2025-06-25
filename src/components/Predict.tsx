@@ -56,6 +56,7 @@ function getWeatherIcon(weatherText: string): IconType {
 	return WiDayCloudy; // fallback default
 }
 
+
 const SkeletonPredict = () => (
 	<div className="header">
 		<div className="predict-skeleton">
@@ -66,9 +67,6 @@ const SkeletonPredict = () => (
 				</div>
 				<div className="title-skeleton">
 					<div className="text-skeleton long" />
-				</div>
-				<div className="subtitle-skeleton">
-					<div className="text-skeleton medium" />
 				</div>
 			</div>
 
@@ -120,9 +118,6 @@ const Predict = () => {
 				<h1 className="inform-title">
 					{predictionData && predictionData.prediksi.prediksi}
 				</h1>
-				<div style={{ fontSize: "12px" }}>
-					Kondisi saat ini : {predictionData && predictionData.prediksi.kondisi}
-				</div>
 			</div>
 
 			<div className="predict">
